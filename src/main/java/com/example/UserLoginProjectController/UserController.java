@@ -11,31 +11,26 @@ import com.example.UserLoginProjectEntity.User;
 import com.example.UserLoginProjectService.UserService;
 
 @RestController
-//@RequestMapping("/api")
+@RequestMapping("/api")
 public class UserController {
-	
+
 	@Autowired
-    private UserService userService;
+	private UserService userService;
 
-    @PostMapping("/register")
-    public String registerUser(@RequestBody User user) {
-        userService.save(user);
-        return "User registered successfully!";
-    }
+	@PostMapping("/register")
+	public String registerUser(@RequestBody User user) {
+		userService.save(user);
+		return "User registered successfully!";
+	}
 
-    @PostMapping("/login")
-    public String loginUser(@RequestBody User user) {
-        User existingUser = userService.findByUsername(user.getUsername());
-        if (existingUser != null && existingUser.getPassword().equals(user.getPassword())) {
-            return "Login successful!";
-        } else {
-            return "Invalid username or password!";
-        }
-    }
-    
-    @GetMapping("/greeting")
-    public String greetingMessage() {
-    	return "hello world";
-    }
+	@PostMapping("/login")
+	public String loginUser(@RequestBody User user) {
+		User existingUser = userService.findByUsername(user.getUsername());
+		if (existingUser != null && existingUser.getPassword().equals(user.getPassword())) {
+			return "Login successful!";
+		} else {
+			return "Invalid username or password!";
+		}
+	}
 
 }
